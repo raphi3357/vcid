@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="container">
+        {% if address.lastStatus %}
+            <div class="col-xs-3"
+                 style="background-color: palegreen; color: #000; border: solid 2px black; text-align: center; overflow-wrap: break-word"
+            >{{ address.body }}</div>
+        {% else %}
+            <div class="col-xs-3"
+                 style="background-color: darkorange; color: #000; border: solid 2px black; text-align: center; overflow-wrap: break-word;"
+            >{{ address.body }}</div>
+        {% endif %}
+        <a class="col-xs-1" style="color:red; font-weight: bold;" href="{{ url_for('delete', id=address.id) }}">X</a>
+    </div>
+</div>
+<br>

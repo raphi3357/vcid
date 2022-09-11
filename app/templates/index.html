@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{# Main page showing the user his watched objects #}
+{% block app_content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    <h3>Watched objects:</h3>
+    <div class="col-xs-4">
+        {# Using the template on _addresses to create a part of the site with every address #}
+        {% for address in addresses %}
+            {% include '_addresses.html' %}
+        {% endfor %}
+
+        <div style="font-style: italic">
+            <span style="background-color: palegreen">Green</span> = available /
+            <span style="background-color: darkorange">Orange</span> = unavailable<br><br>
+        </div>
+
+        {# Form to add new monitoring objects #}
+        {% if form %}
+            {{ wtf.quick_form(form) }}
+            <br>
+        {% endif %}
+        {# Link to edit username #}
+        <p><a href="{{ url_for('edit_profile') }}">Edit your username</a></p>
+    </div>
+
+
+
+{% endblock %}

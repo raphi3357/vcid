@@ -1,0 +1,38 @@
+{# Base HTML file to be used in all pages. Extends the bootstrap base HTML file to include bootstrap #}
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+    {% if title %}{{ title }} - Monitoring{% else %}Monitoring{% endif %}
+{% endblock %}
+
+{# Navbar showing on all pages #}
+{% block navbar %}
+    <div class="nav navbar-default">
+            <ul class="nav nav-pills" style="margin-left: 15vw">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                {% if current_user.is_anonymous %}
+                    <a class="nav-link active" href="{{ url_for('login') }}">Login</a>
+                {% else %}
+                    <a class="nav-link active" href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}
+
+{# Block to show the messages on top of the pages #}
+{% block content %}
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-info" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
